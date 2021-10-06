@@ -1,0 +1,24 @@
+<h1>Goals</h1>
+
+<form action="/add_goal/" method="post">{% csrf_token %}
+  <input type="text" name="name">
+  <input type="text" name="description">
+  <!-- <input type="radio" name="status" default="Not started"> -->
+  <input type="submit" value="Add Goal">
+</form>
+
+<ul>
+  {% for goal in all_goals %}
+    <li>
+      {{goal.name}}
+      <p>
+        {{goal.description}}
+      </p>
+      <!-- {{goal.status}} -->
+      <form action='/delete_goal/{{goal.id}}/' method='post'>{% csrf_token %}
+        <input type="submit" value="Delete">
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+
